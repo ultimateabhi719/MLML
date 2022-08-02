@@ -34,5 +34,5 @@ model = model()
 model.load_weights(model_weights)
 prediction = model.predict(Inp)[0]
 
-print(prediction)
-print([1 if x>0.5 else 0 for x in prediction])
+print("model prediction probabilities:", prediction)
+print("model prediction labels:", [1 if x>0.5 else 0 for x in prediction])
