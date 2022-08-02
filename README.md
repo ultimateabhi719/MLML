@@ -7,7 +7,7 @@ Two input variables are required :
 - **data_csv** : Path to the Input images csv file. Default *"./label.txt"*
 - **img_directory** : Path to the directory of the images in *data_csv*. Default *"./images"*
 
-Run the script to train the Deep Learning  model on 80% of the images in **data_csv**. The most accurate model ( on the validation data ) is saved to file **"./most_acc_model.h5"**. The plot with the training loss is saved to **"./loss_curve.png"**.
+Run the script to train the Deep Learning  model on 80% of the images in **data_csv**. The best model --based on the validation F1-score-- is saved to file **"./best_model.h5"**. The plot with the training loss is saved to **"./loss_curve.png"**.
 
 # Model Inference
 
