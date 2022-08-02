@@ -8,7 +8,7 @@ from tensorflow.keras.models import Sequential
 
 # input Variables
 input_path = "./images/image_525.jpg"
-model_weights = "./most_acc_model.h5"
+model_weights = "./best_model.h5"
 
 # Model Function should be exactly the same as in train.py
 def model():
@@ -34,7 +34,7 @@ model = model()
 model.load_weights(model_weights)
 
 ## convert image to numpy array input
-Inp = np.expand_dims(np.asarray(Image.open(input_path).resize((180,180)))/255.0, axis=0)
+Inp = np.expand_dims(np.asarray(Image.open(input_path).resize((224,224)))/255.0, axis=0)
 prediction = model.predict(Inp)[0]
 
 print("model prediction probabilities:", prediction)
