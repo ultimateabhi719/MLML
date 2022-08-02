@@ -71,21 +71,21 @@ test_generator=test_datagen.flow_from_dataframe(
     class_mode="raw",
     target_size=(224,224))
 
-
-def custom_loss(y_true, y_logit):
-    '''
-    Multi-label cross-entropy
-    * Required "Wp", "Wn" as positive & negative class-weights
-    y_true: true value
-    y_logit: predicted value
-    '''
-    # print("logit:",K.int_shape(y_logit), "\t true:", K.int_shape(y_true))
-    loss = float(0)
-    # print( K.int_shape(y_true), K.int_shape(y_logit)) 
-    first_term = _Wp * y_true * K.log(y_logit + K.epsilon())
-    second_term = _Wn * (1 - y_true) * K.log(1 - y_logit + K.epsilon())
-    loss -= (first_term + second_term)
-    return K.sum(loss)
+def custom_loss(Wp,Wn):
+    def _custom_loss(y_true, y_logit):
+        '''
+        Multi-label cross-entropy
+        y_true: true value
+        y_logit: predicted value
+        '''
+        # print("logit:",K.int_shape(y_logit), "\t true:", K.int_shape(y_true))
+        loss = float(0)
+        # print( K.int_shape(y_true), K.int_shape(y_logit)) 
+        first_term = _Wp * y_true * K.log(y_logit + K.epsilon())
+        second_term = _Wn * (1 - y_true) * K.log(1 - y_logit + K.epsilon())
+        loss -= (first_term + second_term)
+        return K.sum(loss)
+    return _custom_loss
 
 
 def f1_score(y_true, y_logit):
@@ -125,7 +125,21 @@ def model():
 
 resnet_model = model()
 
-# resnet_model.compile(optimizer=Adam(lr=0.001),loss = {'multi_label': custom_loss},metrics=['accuracy',f1_score])
+
+
+# class_weights = {}; positive_weights = {}; negative_weights = {}
+# for label in sorted(labels):
+#     positive_weights[label] = N_train_ /(2 * sum(df[label] == 1))
+#     negative_weights[label] = N_train_ /(2 * sum(df[label] == 0))
+    
+# class_weights['positive_weights'] = positive_weights
+# class_weights['negative_weights'] = negative_weights
+
+# Wp = class_weights['positive_weights']
+# Wn = class_weights['negative_weights']
+# _Wp = [Wp[k] for k in Wp.keys()]
+# _Wn = [Wn[k] for k in Wp.keys()]
+# resnet_model.compile(optimizer=Adam(lr=0.001),loss = {'multi_label': custom_loss(_Wp, _Wn)},metrics=['accuracy',f1_score])
 resnet_model.compile(optimizer=Adam(lr=0.0001),loss = 'binary_crossentropy',metrics=['accuracy',f1_score])
 
 resnet_model.summary()

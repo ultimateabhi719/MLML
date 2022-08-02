@@ -6,11 +6,11 @@ import tensorflow as tf
 from tensorflow.keras.layers import Dense,Flatten
 from tensorflow.keras.models import Sequential
 
+# input Variables
 input_path = "./images/image_525.jpg"
 model_weights = "./most_acc_model.h5"
 
-Inp = np.expand_dims(np.asarray(Image.open(input_path).resize((180,180)))/255.0, axis=0)
-
+# Model Function should be exactly the same as in train.py
 def model():
     tf_model = Sequential()
 
@@ -32,6 +32,9 @@ def model():
 model = model()
 
 model.load_weights(model_weights)
+
+## convert image to numpy array input
+Inp = np.expand_dims(np.asarray(Image.open(input_path).resize((180,180)))/255.0, axis=0)
 prediction = model.predict(Inp)[0]
 
 print("model prediction probabilities:", prediction)
