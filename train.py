@@ -157,3 +157,6 @@ plt.legend(['train', 'validation'])
 # plt.show()
 plt.savefig('loss_curve.png')
 
+
+print("best model saved to:", "best_model.h5")
+print("loss curve saved to:", "loss_curve.png")
