@@ -25,7 +25,7 @@ I use the binary cross-entropy as the loss function for training the model. I te
 - *size of the fully connected layer* after resnet50 : After validating on the validation data 64 was found to be the best size for the layer.
 - *best Model CheckPoint* - The best model was chosen to be the model with the best validation F1-score rather than the model with the best accuracy.
 
-# Missing Data Handling
+# Handling Missing Labels 
 
 If we do not want to make use of the image data for the y-label, we can essentially treat this problem as a data imputation problem. Since we do want to make use of the examples with partially missing labels, we do not want to just remove the rows with missing labels. In this case I tested a Matrix Factorization approach with simple L2 regularization : 
 
