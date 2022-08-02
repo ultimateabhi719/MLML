@@ -13,7 +13,7 @@ Run the script to train the Deep Learning  model on 80% of the images in **data_
 
 file : inference.py
 
-Only one input variable is required.
+Two input variables are required.
 - **input_path** : Path to the input image. Default *"./images/image_525.jpg"*
 - **model_weights** : Path to model weights file. Default *"./most_acc_model.h5"*
 
