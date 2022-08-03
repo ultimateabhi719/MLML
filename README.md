@@ -15,7 +15,7 @@ file : inference.py
 
 Two input variables are required.
 - **input_path** : Path to the input image. Default *"./images/image_525.jpg"*
-- **model_weights** : Path to model weights file. Default *"./most_acc_model.h5"*
+- **model_weights** : Path to model weights file. Default *"./best_model.h5"*
 
 The function outputs the prediction of the model as a vector of multi-class predictions.
 
