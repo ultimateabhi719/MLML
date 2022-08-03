@@ -36,6 +36,7 @@ model.load_weights(model_weights)
 ## convert image to numpy array input
 Inp = np.expand_dims(np.asarray(Image.open(input_path).resize((224,224)))/255.0, axis=0)
 prediction = model.predict(Inp)[0]
+pred = {'attr'+str(i+1):prediction[i] for i in range(4)}
 
-print("model prediction probabilities:", prediction)
-print("model prediction labels:", [1 if x>0.5 else 0 for x in prediction])
+print("model prediction probabilities: attr1 : {attr1:.3f}, attr2 : {attr2:.3f}, attr3 : {attr3:.3f}, attr4 : {attr4:.3f}".format(**pred))
+print("predicted attributes:", [k for k in pred.keys() if pred[k]>0.5])
